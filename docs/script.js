@@ -65,13 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
             .filter(item => filterGenre === 'all' || item.genre === filterGenre)
             .map(item => {
                 const genre = genres.find(g => g.id === item.genre);
+                // スマホ用のタップイベントを追加
                 return `
-                    <div class="item" draggable="true" data-id="${item.id}">
+                    <div class="item" draggable="true" data-id="${item.id}" onclick="addToDaily('${item.id}')">
                         <div class="item-left">
                             <img src="assets/icons/${genre.icon}" class="genre-icon" alt="${genre.name}">
                             ${item.name}
                         </div>
-                        <button class="remove-btn" onclick="removeFromRegistered('${item.id}')">×</button>
+                        <button class="remove-btn" onclick="removeFromRegistered('${item.id}', event)">×</button>
                     </div>
                 `;
             }).join('');
@@ -182,7 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 登録済みアイテムの削除機能を追加
-    window.removeFromRegistered = function(itemId) {
+    window.removeFromRegistered = function(itemId, event) {
+        if (event) {
+            event.stopPropagation();  // クリックイベントの伝播を停止
+        }
         registeredItems = registeredItems.filter(item => item.id !== itemId);
         updateRegisteredItems(genreFilter.value);
         saveData();
@@ -222,6 +226,25 @@ document.addEventListener('DOMContentLoaded', () => {
         isRegisteredItemsVisible = false;
         document.getElementById('registeredItemsContainer').classList.add('hidden');
     }
+
+    // タップで追加する関数を追加
+    window.addToDaily = function(itemId) {
+        // スマホの場合のみ実行（タッチデバイスの判定）
+        if ('ontouchstart' in window) {
+            const item = registeredItems.find(i => i.id === itemId);
+            const currentItems = dailyItems[currentDay];
+            
+            if (item && !currentItems.find(i => i.id === itemId)) {
+                if (currentItems.length >= 10) {
+                    alert('持ち物リストは最大10個までです');
+                    return;
+                }
+                dailyItems[currentDay].push({...item, checked: false});
+                updateDailyItems();
+                saveData();
+            }
+        }
+    };
 
     // 初期化
     initializeGenres();
