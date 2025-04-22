@@ -198,6 +198,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // 表示/非表示の状態を保存
+    let isRegisteredItemsVisible = true;
+
+    // 切り替えボタンのイベントリスナーを追加
+    document.getElementById('toggleRegisteredItems').addEventListener('click', () => {
+        const container = document.getElementById('registeredItemsContainer');
+        isRegisteredItemsVisible = !isRegisteredItemsVisible;
+        
+        if (isRegisteredItemsVisible) {
+            container.classList.remove('hidden');
+        } else {
+            container.classList.add('hidden');
+        }
+        
+        // 状態を保存
+        localStorage.setItem('isRegisteredItemsVisible', isRegisteredItemsVisible);
+    });
+
+    // 保存された表示/非表示の状態を復元
+    const savedVisibility = localStorage.getItem('isRegisteredItemsVisible');
+    if (savedVisibility === 'false') {
+        isRegisteredItemsVisible = false;
+        document.getElementById('registeredItemsContainer').classList.add('hidden');
+    }
+
     // 初期化
     initializeGenres();
     updateRegisteredItems();

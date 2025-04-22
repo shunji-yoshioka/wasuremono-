@@ -16,45 +16,36 @@
 </head>
 <body>
     <div class="container">
-        <!-- 曜日タブ -->
-        <div class="weekday-tabs">
-            <button class="tab-button active" data-day="monday">月</button>
-            <button class="tab-button" data-day="tuesday">火</button>
-            <button class="tab-button" data-day="wednesday">水</button>
-            <button class="tab-button" data-day="thursday">木</button>
-            <button class="tab-button" data-day="friday">金</button>
-        </div>
-
-        <!-- メインコンテンツエリア -->
-        <div class="content-area">
-            <!-- 登録済みアイテムリスト -->
-            <div class="registered-items">
-                <h2>登録済みアイテム</h2>
-                <div class="genre-filter">
-                    <select id="genreFilter">
-                        <option value="all">すべて</option>
-                    </select>
-                </div>
-                <div class="items-container" id="registeredItems">
-                </div>
+        <h2>とうろくずみアイテム</h2>
+        <button id="toggleRegisteredItems" class="toggle-button">
+            ひょうじ/ひひょうじ
+        </button>
+        <div id="registeredItemsContainer" class="registered-items">
+            <h2>登録済みアイテム</h2>
+            <div class="genre-filter">
+                <select id="genreFilter">
+                    <option value="all">すべて</option>
+                </select>
             </div>
-
-            <!-- 持ち物リスト -->
-            <div class="daily-items">
-                <h2>持ち物リスト</h2>
-                <div class="items-container" id="dailyItems">
-                </div>
+            <div class="items-container" id="registeredItems">
             </div>
         </div>
 
-        <!-- アイテム追加フォーム -->
-        <div class="add-item-form">
-            <h3>新しいアイテムを追加</h3>
-            <select id="itemGenre">
-            </select>
-            <input type="text" id="itemName" placeholder="アイテム名">
-            <button id="addItemBtn">追加</button>
+        <!-- 持ち物リスト -->
+        <div class="daily-items">
+            <h2>持ち物リスト</h2>
+            <div class="items-container" id="dailyItems">
+            </div>
         </div>
+    </div>
+
+    <!-- アイテム追加フォーム -->
+    <div class="add-item-form">
+        <h3>新しいアイテムを追加</h3>
+        <select id="itemGenre">
+        </select>
+        <input type="text" id="itemName" placeholder="アイテム名">
+        <button id="addItemBtn">追加</button>
     </div>
     <script src="script.js"></script>
 </body>

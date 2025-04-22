@@ -351,4 +351,27 @@ button:hover {
         min-width: 50px;
         font-size: 12px;
     }
+}
+
+.toggle-button {
+    background-color: #ff9999;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.toggle-button:hover {
+    background-color: #ff7777;
+}
+
+.registered-items {
+    transition: all 0.3s ease;
+}
+
+.registered-items.hidden {
+    display: none;
 } 
